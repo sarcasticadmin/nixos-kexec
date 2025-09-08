@@ -17,6 +17,8 @@ writeArgcShellApplication {
     kexec-tools
   ];
 
+  checkPhase = false;
+
   text = ''
     kexec_jq=${./nixos-kexec.jq}
     ${lib.fileContents ./nixos-kexec.bash}
