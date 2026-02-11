@@ -1,0 +1,13 @@
+inputs:
+inputs.nixpkgs.lib.genAttrs
+  [
+    "aarch64-linux"
+    "x86_64-linux"
+  ]
+  (
+    system:
+    import inputs.nixpkgs {
+      inherit system;
+      overlays = [ inputs.self.overlays.default ];
+    }
+  )
