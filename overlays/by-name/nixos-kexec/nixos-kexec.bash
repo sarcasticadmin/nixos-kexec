@@ -20,7 +20,6 @@ if [[ -z $choice ]]; then
         gen_selected=$(printf '%s\n' "${generations[@]}" | fzf --select-1 \
               --accept-nth 2 \
               --reverse \
-              --tac \
               --header='NixOS kexec Menu' \
               --header-first \
               --header-border=bold \
