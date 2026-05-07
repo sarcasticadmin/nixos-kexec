@@ -11,7 +11,7 @@ eval "$(argc --argc-eval "$0" "$@")"
 choice=${argc_config:-}
 
 if [[ -z $choice ]]; then
-        IFS=$'\r\n' generations=($(find /nix/var/nix/profiles -name 'system-*' | cut -d'-' -f 2 | sort))
+        IFS=$'\r\n' generations=($(find /nix/var/nix/profiles -name 'system-*' | cut -d'-' -f 2 | sort -nr))
         for ((i = 0; i < ${#generations[*]}; ++i)); do
           kernel=$(jq -r '."org.nixos.bootspec.v1".label' "/nix/var/nix/profiles/system-${generations[$i]}-link/boot.json")
           generations[i]="Generation ${generations[$i]} $kernel"
@@ -27,7 +27,7 @@ if [[ -z $choice ]]; then
               --info=hidden \
               --color='hl:65,fg:252,header:65,fg+:252' \
               --color='pointer:100,marker:100,prompt:110,hl+:108')
-        choice="/nix/var/nix/profiles/system-${gen_selected}-link/boot.json"
+        choice="/nix/var/nix/profiles/system-${gen_selected}-link"
 fi
 
 if [[ -z $choice ]]; then
